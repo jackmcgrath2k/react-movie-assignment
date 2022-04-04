@@ -18,6 +18,7 @@ const PeopleMoviesPage = (props) => {
   }  
   const people = data.results;
 
+
   return (
     <PageTemplate
       title='People'

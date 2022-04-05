@@ -9,6 +9,12 @@ import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews"
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import { getSimilarMovies } from "../../api/tmdb-api";
+import { useQuery } from "react-query";
+import Spinner from '../spinner';
+
 
 
 const root = {
@@ -23,6 +29,21 @@ const chip = { margin: 0.5 };
 
 const MovieDetails = ({ movie }) => {  // Don't miss this!
   const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const { data , error, isLoading, isError } = useQuery( // similar movies??
+    ["similar", { id: movie.id }],
+    getSimilarMovies
+  );
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  if (isError) {
+    return <h1>{error.message}</h1>;
+  }
+  const similar = data.results 
+
 
   return (
     <>
@@ -88,7 +109,24 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
       <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
         <MovieReviews movie={movie} />
       </Drawer>
+
+      <Typography variant="h5" component="h3">
+        Similar Movies
+      </Typography>
+
+      <ImageList 
+                cols={1}>
+                {similar.map((results) => (
+                    <ImageListItem key={results.file_path} cols={1}>
+                    <img
+                        src={`https://image.tmdb.org/t/p/w500/${results.poster_path}`}
+                        alt={results.overview}
+                    />
+                    </ImageListItem>
+                ))}
+            </ImageList>
       </>
   );
+
 };
 export default MovieDetails ;

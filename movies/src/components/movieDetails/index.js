@@ -8,12 +8,15 @@ import NavigationIcon from "@mui/icons-material/Navigation";
 import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
-import MovieReviews from "../movieReviews"
+import MovieReviews from "../movieReviews";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import { getSimilarMovies } from "../../api/tmdb-api";
+import MovieRecommendations from "../movieRecommendations";
+
 import { useQuery } from "react-query";
 import Spinner from '../spinner';
+
 
 
 
@@ -31,9 +34,10 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const { data , error, isLoading, isError } = useQuery( // similar movies??
-    ["similar", { id: movie.id }],
+    ["similar",  { id: movie.id }],
     getSimilarMovies
   );
+
 
   if (isLoading) {
     return <Spinner />;
@@ -42,7 +46,11 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
   if (isError) {
     return <h1>{error.message}</h1>;
   }
+
+  
   const similar = data.results 
+
+
 
 
   return (
@@ -92,7 +100,35 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
             <Chip label={c.name} sx={{...chip}} />
           </li>
         ))}
-      </Paper>
+</Paper>
+
+<Paper >
+      <Typography variant="h5" component="h3">
+        Similar Movies
+      </Typography>
+
+      <ImageList sx={{width: 'auto', height: 'auto'}} cols={5}>
+                
+                {similar.map((results) => (
+                    <ImageListItem key={results.file_path} cols={1}>
+                    <img
+                        src={`https://image.tmdb.org/t/p/w500/${results.poster_path}`}
+                        alt={results.overview}
+                    />
+                    </ImageListItem>
+                ))}
+            </ImageList>
+            </Paper>
+
+            <Paper >
+      <Typography variant="h5" component="h3">
+        Recommended Movies
+      </Typography>
+
+      <MovieRecommendations movie={movie} />
+            </Paper>
+
+      <Paper>
       <Fab
         color="secondary"
         variant="extended"
@@ -108,23 +144,11 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
       </Fab>
       <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
         <MovieReviews movie={movie} />
+        
       </Drawer>
+      </Paper>
 
-      <Typography variant="h5" component="h3">
-        Similar Movies
-      </Typography>
-
-      <ImageList 
-                cols={1}>
-                {similar.map((results) => (
-                    <ImageListItem key={results.file_path} cols={1}>
-                    <img
-                        src={`https://image.tmdb.org/t/p/w500/${results.poster_path}`}
-                        alt={results.overview}
-                    />
-                    </ImageListItem>
-                ))}
-            </ImageList>
+            
       </>
   );
 

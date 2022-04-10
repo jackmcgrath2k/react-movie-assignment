@@ -1,9 +1,6 @@
 import React, { useEffect, useState }  from "react";
-
 import Paper from "@mui/material/Paper";
-
 import { getMovieRecommendations } from "../../api/tmdb-api";
-
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 

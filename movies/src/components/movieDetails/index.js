@@ -14,6 +14,7 @@ import ImageListItem from "@mui/material/ImageListItem";
 import { getSimilarMovies } from "../../api/tmdb-api";
 import MovieRecommendations from "../movieRecommendations";
 
+
 import { useQuery } from "react-query";
 import Spinner from '../spinner';
 
@@ -102,6 +103,7 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
         ))}
 </Paper>
 
+
 <Paper >
       <Typography variant="h5" component="h3">
         Similar Movies
@@ -127,6 +129,7 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
 
       <MovieRecommendations movie={movie} />
             </Paper>
+
 
       <Paper>
       <Fab

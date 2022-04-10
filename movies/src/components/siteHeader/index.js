@@ -31,7 +31,7 @@ const SiteHeader = ({ history }) => {
     { label: "Favorites", path: "/movies/favorites" },
     { label: "UPCOMING", path: "/movies/upcoming" },
     { label: "Popular", path: "/movies/popular" },
- 
+    { label: "Top Rated", path: "/movies/top_rated" },
     { label: "Now Playing", path: "/movies/now_playing" },
   ];
 
@@ -45,7 +45,7 @@ const SiteHeader = ({ history }) => {
 
   return (
     <>
-      <AppBar position="fixed" color="secondary">
+      <AppBar position="fixed" color="primary">
         <Toolbar>
           <Typography variant="h4" sx={{ flexGrow: 1 }}>
             The Movie App

@@ -42,3 +42,4 @@ Extra:
 + /movies/top_rated - Displays the Top Rated movies of all time
 + /trending/movie/day - Displays the daily tredning movies
 
+####

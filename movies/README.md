@@ -40,4 +40,5 @@ Extra:
 + /movies/popular - Displays the popular movies page
 + /movies/now_playing - Displays the Now Playing movies page
 + /movies/top_rated - Displays the Top Rated movies of all time
++ /trending/movie/day - Displays the daily tredning movies
 

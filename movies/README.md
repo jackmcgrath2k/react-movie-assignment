@@ -16,6 +16,7 @@ This assignment involved adding to the movies app we have been creating over the
 New Routing, Parameterized URLs & TMDB Endpoints Added:
 + Similar movies now appear underneath a movies page when you click more info.
 + Recommended movies now appear underneath a movies page when you click more info.
++ Tredning movies now appear as it's own page.
 
 
 Extra:
@@ -30,8 +31,8 @@ Extra:
 + List of movies that are to be recommended based off the currently selected one - /movie/{movie_id}/recommendations
 + List of movies Now Playing - /movies/now_playing
 + List of movies that are Top Rates - /movies/top_rated
-+ Popular Movies = /movies/popular
-
++ List of movies that are currently popular - /movies/popular
++ List of movies that are currently trending - /trending/movie/day
 
 
 ## Routing.
